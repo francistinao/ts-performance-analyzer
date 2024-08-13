@@ -1,0 +1,27 @@
+{
+	"name": "ts-performance-analyzer",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.ts",
+	"scripts": {
+		"dev": "node dist/index.js",
+		"start": "ts-node src/index.ts",
+		"build": "rollup -c",
+		"prepare": "husky"
+	},
+	"keywords": [],
+	"author": "Francis Tin-ao",
+	"license": "ISC",
+	"dependencies": {
+		"@rollup/plugin-commonjs": "^26.0.1",
+		"@rollup/plugin-node-resolve": "^15.2.3",
+		"@rollup/plugin-terser": "^0.4.4",
+		"@types/node": "^22.2.0",
+		"@types/rollup": "^0.54.0",
+		"@types/typescript": "^2.0.0",
+		"husky": "^9.1.4",
+		"rollup": "^4.20.0",
+		"rollup-plugin-typescript2": "^0.36.0",
+		"typescript": "^5.5.4"
+	}
+}
