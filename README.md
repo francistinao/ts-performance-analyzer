@@ -47,6 +47,7 @@ WORK IN PROGRESS
 ```bash
 ts-performance-analyzer/
 ├── dist/
+│   ├── index.js 
 ├── src/
 │   ├── utils  
 │   │    ├── analyze.util.ts    
