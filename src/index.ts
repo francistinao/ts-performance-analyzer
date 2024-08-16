@@ -9,7 +9,7 @@ import {
 } from "./helpers/extract.helper";
 import { compileCodeBlock } from "./helpers/compile.helper";
 
-export class TypeScriptPerformanceAnalyzer {
+class TypeScriptPerformanceAnalyzer {
 	private program: ts.Program;
 
 	constructor(private projectDir: string) {
@@ -121,3 +121,5 @@ export class TypeScriptPerformanceAnalyzer {
 		}
 	}
 }
+
+export default TypeScriptPerformanceAnalyzer;

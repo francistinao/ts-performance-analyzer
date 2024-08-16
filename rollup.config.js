@@ -5,10 +5,18 @@ const terser = require("@rollup/plugin-terser");
 
 module.exports = {
 	input: "./src/index.ts",
-	output: {
-		file: "./dist/index.js",
-		format: "es",
-	},
+	output: [
+		{
+			file: "dist/index.js",
+			format: "cjs",
+			sourcemap: true,
+		},
+		{
+			file: "dist/index.esm.js",
+			format: "es",
+			sourcemap: true,
+		},
+	],
 	plugins: [
 		resolve({ preferBuiltins: true }),
 		commonjs(),

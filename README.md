@@ -48,32 +48,18 @@ This will generate a performance report with details about your TypeScript proje
 - Performance improvement suggestions
 - Performance of a specific function in a file (Total Execution Time and Its Memory Occupation)
 
-## Project Structure
-
-```bash
-ts-performance-analyzer/
-├── dist/
-│   ├── index.js 
-├── src/
-│   ├── utils  
-│   │    ├── analyze.util.ts    
-│   ├── types
-│   │    ├── global.d.ts           
-│   └── index.ts            
-```
-
 ## Usage
 
 1. Import the library in your code
 
 ```bash
-import { TypeScriptPerformanceAnalyzer } from "ts-performance-analyzer";
+import TypeScriptPerformanceAnalyzer from "ts-performance-analyzer";
 ```
 
 2. Instantiate the class and pass the parameter of the root directory of your project
 
 ```bash
-const variable_name = new TypeScriptPerformanceAnalyzer(__dirname);
+const analyzer = new TypeScriptPerformanceAnalyzer(__dirname);
 ```
 
 3. Choose either testing the performance of the overall project or a specific function in a file
@@ -81,7 +67,7 @@ const variable_name = new TypeScriptPerformanceAnalyzer(__dirname);
 ```bash
 
 // Testing overall performance of the project
-const report = variable_name.analyze();
+const report = analyzer.analyze();
 
 console.log("Performance Report:");
 console.log(`Total Files: ${report.totalFiles}`);
@@ -103,7 +89,7 @@ console.log(`Type Checking Time: ${report.typeCheckingTime}ms`);
  // Testing execution time and memory usage of a specific function
  
  async(() => {
-  	const test = await variable_name.functionPerformance(
+  	const test = await analyzer.functionPerformance(
 		__dirname, -> root_dir
 		"/tests/test.ts", -> path
 		"bubble" -> function_name
