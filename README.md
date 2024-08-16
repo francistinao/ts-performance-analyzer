@@ -23,13 +23,6 @@ git clone https://github.com/francistinao/ts-performance-analyzer.git
 cd ts-performance-analyzer
 npm install
 ```
-## Installation
-
-You can run the analyzer using the following command:
-
-```bash
-npm run start
-```
 
 Or Install it via NPM:
 
@@ -96,7 +89,7 @@ console.log(`Type Checking Time: ${report.typeCheckingTime}ms`);
 	 );
  })
 
- console.log("\n\nFunction Performance Report:");
+ console.log("Function Performance Report:");
 	console.log(`Function Total Time Execution: ${functionTest.totalTime}ms`);
 	console.log(`Function Memory Space: ${functionTest.totalSpace}`);
 
