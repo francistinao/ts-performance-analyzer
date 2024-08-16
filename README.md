@@ -16,15 +16,7 @@ The **TypeScript Performance Analyzer** is a tool designed to help developers un
 
 ## Installation
 
-To get started with the TypeScript Performance Analyzer, clone the repository and install the necessary dependencies:
-
-```bash
-git clone https://github.com/francistinao/ts-performance-analyzer.git
-cd ts-performance-analyzer
-npm install
-```
-
-Or Install it via NPM:
+Install via NPM:
 
 ```bash
 
