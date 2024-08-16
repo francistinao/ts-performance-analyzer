@@ -31,6 +31,14 @@ You can run the analyzer using the following command:
 npm run start
 ```
 
+Or Install it via NPM:
+
+```bash
+
+npm i ts-performance-analyzer
+
+```
+
 This will generate a performance report with details about your TypeScript project, including:
 
 - Total number of files
