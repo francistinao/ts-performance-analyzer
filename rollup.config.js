@@ -11,11 +11,6 @@ module.exports = {
 			format: "cjs",
 			sourcemap: true,
 		},
-		{
-			file: "dist/index.esm.js",
-			format: "es",
-			sourcemap: true,
-		},
 	],
 	plugins: [
 		resolve({ preferBuiltins: true }),
