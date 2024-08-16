@@ -67,7 +67,7 @@ ts-performance-analyzer/
 1. Import the library in your code
 
 ```bash
-import { TypeScriptPerformanceAnalyzer } from "./utils/analyzer.util";
+import { TypeScriptPerformanceAnalyzer } from "ts-performance-analyzer";
 ```
 
 2. Instantiate the class and pass the parameter of the root directory of your project
