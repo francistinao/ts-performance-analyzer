@@ -6,12 +6,7 @@ export interface PerformanceReport {
 	suggestions?: string[];
 }
 
-export interface FunctionCheckingParams {
-	filePath: string;
-	functionName: string;
-}
-
 export interface FunctionPerformanceReport {
 	totalTime: number;
-	totalSpace: number;
+	totalSpace: string;
 }

@@ -1,9 +1,13 @@
 import ts, { Node, SourceFile } from "typescript";
+import { PerformanceReport, FunctionPerformanceReport } from "../types/global";
+import path from "path";
+import fs from "fs";
+import { getTotalMemoryUsed, getTotalTimeScore } from "../libs/performance";
 import {
-	PerformanceReport,
-	FunctionCheckingParams,
-	FunctionPerformanceReport,
-} from "../types/global";
+	extractFunctionCode,
+	createFunctionFromCode,
+} from "../helpers/extract.helper";
+import { compileCodeBlock } from "../helpers/compile.helper";
 
 export class TypeScriptPerformanceAnalyzer {
 	private program: ts.Program;
@@ -12,22 +16,12 @@ export class TypeScriptPerformanceAnalyzer {
 		this.program = ts.createProgram([`${projectDir}/src/**/*.ts`], {});
 	}
 
-	/**
-	 *
-	 * Consider number of files, code lines inside the files, and types being used
-	 *
-	 * Addon soon: Function checker and performance testing
-	 *
-	 * Create method for function performance checker
-	 *
-	 */
 	analyze(): PerformanceReport {
 		const start = process.hrtime();
 		const sourceFiles = this.program.getSourceFiles();
 		let totalLines = 0;
 		let totalTypes = 0;
 
-		// access through each files in the directory
 		sourceFiles.forEach((sourceFile: SourceFile) => {
 			const fileLines =
 				sourceFile.getLineAndCharacterOfPosition(sourceFile.getEnd()).line + 1;
@@ -58,8 +52,8 @@ export class TypeScriptPerformanceAnalyzer {
 		totalTypes: number,
 		typeCheckingTime: number
 	): string[] {
-		const MINIMUM_OPTIMAL_TIME = 1000; //in milliseconds
-		const MINIMUM_OPTIMAL_TYPES = 10000; //number of types
+		const MINIMUM_OPTIMAL_TIME = 1000;
+		const MINIMUM_OPTIMAL_TYPES = 10000;
 
 		const suggestions: string[] = [];
 		if (typeCheckingTime > MINIMUM_OPTIMAL_TIME) {
@@ -75,17 +69,55 @@ export class TypeScriptPerformanceAnalyzer {
 		return suggestions;
 	}
 
-	//wip
-	private async functionPerformance({
-		filePath,
-		functionName,
-	}: FunctionCheckingParams): Promise<FunctionPerformanceReport> {
+	async functionPerformance(
+		projectDir: string,
+		filePath: string,
+		functionName: string
+	): Promise<FunctionPerformanceReport> {
 		let totalTime = 0;
-		let totalSpace = 0;
+		let totalSpace = "";
 
-		return {
-			totalTime,
-			totalSpace,
-		};
+		const file = path.join(projectDir, filePath);
+
+		if (!fs.existsSync(file)) {
+			throw new Error(`File ${filePath} does not exist`);
+		}
+
+		fs.readFile(file, (err, data) => {
+			if (data.length === 0) {
+				throw new Error(
+					`File ${filePath} is empty`,
+					err as unknown as ErrorOptions
+				);
+			}
+		});
+
+		try {
+			const fileContent = fs.readFileSync(file, "utf8");
+
+			const lines = fileContent.split("\n");
+
+			try {
+				const tsFoo = extractFunctionCode(lines, functionName);
+				const jsFoo = compileCodeBlock(tsFoo);
+				const testFoo = createFunctionFromCode(jsFoo);
+
+				totalTime = await getTotalTimeScore(testFoo);
+
+				totalSpace = await getTotalMemoryUsed(testFoo);
+			} catch (err) {
+				console.log(err);
+				return Promise.reject(
+					new Error(`Error evaluating function`, err as unknown as ErrorOptions)
+				);
+			}
+
+			return {
+				totalTime,
+				totalSpace,
+			};
+		} catch (err) {
+			throw new Error(`Error in function performance analysis: ${err}`);
+		}
 	}
 }

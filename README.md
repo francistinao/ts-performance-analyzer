@@ -23,7 +23,7 @@ git clone https://github.com/francistinao/ts-performance-analyzer.git
 cd ts-performance-analyzer
 npm install
 ```
-## Usage
+## Installation
 
 You can run the analyzer using the following command:
 
@@ -38,9 +38,7 @@ This will generate a performance report with details about your TypeScript proje
 - Total types found
 - Time taken for type-checking
 - Performance improvement suggestions
-
-WORK IN PROGRESS
-- Analyze the performance of a specific function (Compute its Time and Space complexity)
+- Performance of a specific function in a file (Total Execution Time and Its Memory Occupation)
 
 ## Project Structure
 
@@ -56,9 +54,69 @@ ts-performance-analyzer/
 │   └── index.ts            
 ```
 
-## Development
+## Usage
 
-This project is currently under active development. Contributions, issues, and feature requests are welcome! Please feel free to fork the repository and submit pull requests.
+1. Import the library in your code
+
+```bash
+import { TypeScriptPerformanceAnalyzer } from "./utils/analyzer.util";
+```
+
+2. Instantiate the class and pass the parameter of the root directory of your project
+
+```bash
+const variable_name = new TypeScriptPerformanceAnalyzer(__dirname);
+```
+
+3. Choose either testing the performance of the overall project or a specific function in a file
+
+```bash
+
+// Testing overall performance of the project
+const report = variable_name.analyze();
+
+console.log("Performance Report:");
+console.log(`Total Files: ${report.totalFiles}`);
+console.log(`Total Lines: ${report.totalLines}`);
+console.log(`Total Types: ${report.totalTypes}`);
+console.log(`Type Checking Time: ${report.typeCheckingTime}ms`);
+
+/**
+ Sample output:
+
+ Performance Report:
+ Total Files: 155
+ Total Lines: 113949
+ Total Types: 3688
+ Type Checking Time: 350.0381ms
+ 
+ */
+
+ // Testing execution time and memory usage of a specific function
+ 
+ async(() => {
+  	const test = await variable_name.functionPerformance(
+		__dirname, -> root_dir
+		"/tests/test.ts", -> path
+		"bubble" -> function_name
+	 );
+ })
+
+ console.log("\n\nFunction Performance Report:");
+	console.log(`Function Total Time Execution: ${functionTest.totalTime}ms`);
+	console.log(`Function Memory Space: ${functionTest.totalSpace}`);
+
+ /**
+ 
+  Sample output:
+
+  Function Performance Report:
+  Function Total Time Execution: 0.037699999999858846ms
+  Function Memory Space: 1.73 KB
+
+  */
+
+```
 
 ## Contributing 
 
@@ -77,4 +135,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Author
 Francis Tin-ao.
 
-Disclaimer: This project is currently under development. The features and functionalities described in this documentation are subject to change. Use at your own discretion.
