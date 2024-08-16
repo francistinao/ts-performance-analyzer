@@ -2,13 +2,15 @@
 	"name": "ts-performance-analyzer",
 	"version": "1.0.5",
 	"description": "a tool designed to help developers understand and optimize the performance of their TypeScript projects.",
+	"type": "module",
 	"main": "dist/index.js",
 	"module": "dist/index.esm.js",
-	"types": "src/types/global.d.ts",
+	"types": "dist/index.ts",
 	"scripts": {
 		"dev": "node dist/index.js",
 		"start": "ts-node src/index.ts",
-		"build": "rollup -c",
+		"build": "rollup -c rollup.config.cjs && npm run copy-types",
+		"copy-types": "xcopy /s /e src\\types dist\\types",
 		"prepare": "husky",
 		"test": "echo \"Hello world\""
 	},
@@ -16,6 +18,7 @@
 	"author": "Francis Tin-ao",
 	"license": "MIT",
 	"dependencies": {
+		"@rollup/plugin-babel": "^6.0.4",
 		"@rollup/plugin-commonjs": "^26.0.1",
 		"@rollup/plugin-node-resolve": "^15.2.3",
 		"@rollup/plugin-terser": "^0.4.4",
@@ -25,9 +28,9 @@
 		"husky": "^9.1.4",
 		"rollup": "^4.20.0",
 		"rollup-plugin-typescript2": "^0.36.0",
+		"ts-performance-analyzer": "^1.0.5",
 		"typescript": "^5.5.4"
 	},
-	"devDependencies": {},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/francistinao/ts-performance-analyzer.git"
