@@ -60,11 +60,11 @@ const analyzer = new TypeScriptPerformanceAnalyzer("path_to_your_project");
 
 ```
 
-3. Choose either testing the performance of the overall project or a specific function in a file
+4. Choose either testing the performance of the overall project or a specific function in a file
 
 ```bash
 
-// Testing overall performance of the project
+# Testing overall performance of the project
 const report = analyzer.analyze();
 
 console.log("Performance Report:");
@@ -84,19 +84,26 @@ console.log(`Type Checking Time: ${report.typeCheckingTime}ms`);
  
  */
 
- // Testing execution time and memory usage of a specific function
+ # Testing execution time and memory usage of a specific function
  
- async(() => {
-  	const test = await analyzer.functionPerformance(
+ const foo = async () => {
+  	const result = await analyzer.functionPerformance(
 		__dirname, -> root_dir
 		"/tests/test.ts", -> path
 		"bubble" -> function_name
 	 );
- })
 
- console.log("Function Performance Report:");
-	console.log(`Function Total Time Execution: ${functionTest.totalTime}ms`);
-	console.log(`Function Memory Space: ${functionTest.totalSpace}`);
+		return {
+   time: result.totalTime,
+   space: result.totalSpace
+  }
+ }
+
+ foo().then((res) => {
+		console.log("Function Performance Report:");
+		console.log(`Function Total Time Execution: ${res.totalTime}ms`);
+		console.log(`Function Memory Space: ${res.totalSpace}`);
+	})
 
  /**
  
