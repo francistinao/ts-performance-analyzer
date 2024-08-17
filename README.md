@@ -96,9 +96,9 @@ Accepted:
 - Default functions
 - Functions that are arrow functions
 - Functions that are asynchronous functions
-- Exported arrow and default functions, synchronous or asynchronous
 
 Not Accepted:
+- Functions that are exported
 - Functions that are constructors
 - Functions that are static methods
 - Functions that are class methods
@@ -108,9 +108,6 @@ line.includes(`async function ${functionName}`) ||
 line.includes(`const ${functionName} = async`) ||
 line.includes(`const ${functionName} = `) ||
 line.includes(`function ${functionName}`) ||
-line.includes(`export const ${functionName}`) ||
-line.includes(`export function ${functionName}`)
-
 ```
 
 

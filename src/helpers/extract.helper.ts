@@ -11,9 +11,7 @@ export const extractFunctionCode = (
 			line.includes(`async function ${functionName}`) ||
 			line.includes(`const ${functionName} = async`) ||
 			line.includes(`const ${functionName} = `) ||
-			line.includes(`function ${functionName}`) ||
-			line.includes(`export const ${functionName}`) ||
-			line.includes(`export function ${functionName}`)
+			line.includes(`function ${functionName}`)
 		) {
 			functionCtx = true;
 		}
