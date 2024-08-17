@@ -24,6 +24,8 @@ npm i ts-performance-analyzer
 
 ```
 
+## Features
+
 This will generate a performance report with details about your TypeScript project, including:
 
 - Total number of files
@@ -44,7 +46,18 @@ import TypeScriptPerformanceAnalyzer from "ts-performance-analyzer";
 2. Instantiate the class and pass the parameter of the root directory of your project
 
 ```bash
-const analyzer = new TypeScriptPerformanceAnalyzer(__dirname);
+const analyzer = new TypeScriptPerformanceAnalyzer("path_to_your_project");
+```
+
+3. In your package.json, make sure to add
+
+```bash
+
+"type": "module",
+	"scripts": {
+		"start": "node --loader ts-node/esm <path_to_your_index_file>"
+	},
+
 ```
 
 3. Choose either testing the performance of the overall project or a specific function in a file
@@ -109,7 +122,7 @@ If you'd like to contribute to the project, please follow these steps:
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
 
 ## Author
 Francis Tin-ao.
