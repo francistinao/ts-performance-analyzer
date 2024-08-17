@@ -3,7 +3,7 @@
 	"version": "1.0.9",
 	"description": "a tool designed to help developers understand and optimize the performance of their TypeScript projects.",
 	"type": "module",
-	"main": "dist/index.esm.js",
+	"main": "dist/index.js",
 	"module": "dist/index.esm.js",
 	"types": "dist/index.ts",
 	"scripts": {
