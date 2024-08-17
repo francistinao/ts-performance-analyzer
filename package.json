@@ -1,6 +1,6 @@
 {
 	"name": "ts-performance-analyzer",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "a tool designed to help developers understand and optimize the performance of their TypeScript projects.",
 	"type": "module",
 	"main": "dist/index.esm.js",
