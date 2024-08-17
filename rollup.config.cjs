@@ -13,7 +13,7 @@ module.exports = {
 	output: [
 		{
 			file: "dist/index.js",
-			format: "es",
+			format: "cjs",
 			inlineDynamicImports: true,
 		},
 		{
