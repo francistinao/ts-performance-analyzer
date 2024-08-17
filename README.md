@@ -5,7 +5,7 @@
 
 ## Overview
 
-The **TypeScript Performance Analyzer** is a tool designed to help developers understand and optimize the performance of their TypeScript projects. It provides insights into the number of files, lines, and types in a project, and measures the time taken for type-checking. The tool also offers suggestions for improving performance, making it an invaluable resource for large-scale TypeScript applications.
+The **TypeScript Performance Analyzer** is a package designed to help developers understand and optimize the performance of their TypeScript projects. It provides insights into the number of files, lines, and types in a project, and measures the time taken for type-checking. The tool also offers suggestions for improving performance, making it an invaluable resource for large-scale TypeScript applications.
 
 ## Features
 
@@ -62,9 +62,10 @@ const analyzer = new TypeScriptPerformanceAnalyzer("path_to_your_project");
 
 4. Choose either testing the performance of the overall project or a specific function in a file
 
+## Testing overall performance of the project
+
 ```bash
 
-# Testing overall performance of the project
 const report = analyzer.analyze();
 
 console.log("Performance Report:");
@@ -73,19 +74,47 @@ console.log(`Total Lines: ${report.totalLines}`);
 console.log(`Total Types: ${report.totalTypes}`);
 console.log(`Type Checking Time: ${report.typeCheckingTime}ms`);
 
-/**
- Sample output:
+```
 
- Performance Report:
- Total Files: 155
- Total Lines: 113949
- Total Types: 3688
- Type Checking Time: 350.0381ms
- 
- */
+Sample Output:
 
- # Testing execution time and memory usage of a specific function
- 
+```bash
+
+Performance Report:
+Total Files: 155
+Total Lines: 113949
+Total Types: 3688
+Type Checking Time: 350.0381ms
+
+
+```
+
+## Testing execution time and memory usage of a specific function
+
+Base conditions for function performance analyzer</br></br>
+Accepted:
+- Default functions
+- Functions that are arrow functions
+- Functions that are asynchronous functions
+- Exported arrow and default functions, synchronous or asynchronous
+
+Not Accepted:
+- Functions that are constructors
+- Functions that are static methods
+- Functions that are class methods
+
+```bibtext
+line.includes(`async function ${functionName}`) ||
+line.includes(`const ${functionName} = async`) ||
+line.includes(`const ${functionName} = `) ||
+line.includes(`function ${functionName}`) ||
+line.includes(`export const ${functionName}`) ||
+line.includes(`export function ${functionName}`)
+
+```
+
+
+``` bash
  const foo = async () => {
   	const result = await analyzer.functionPerformance(
 		__dirname, -> root_dir
@@ -105,15 +134,14 @@ console.log(`Type Checking Time: ${report.typeCheckingTime}ms`);
 		console.log(`Function Memory Space: ${res.totalSpace}`);
 	})
 
- /**
- 
-  Sample output:
+```
 
-  Function Performance Report:
-  Function Total Time Execution: 0.037699999999858846ms
-  Function Memory Space: 1.73 KB
+Sample Output:
 
-  */
+```bash
+Function Performance Report:
+Function Total Time Execution: 0.037699999999858846ms
+Function Memory Space: 1.73 KB
 
 ```
 
